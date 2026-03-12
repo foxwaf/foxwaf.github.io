@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Tool</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:white;
+    text-align:center;
+}
+
+header{
+    padding:80px 20px;
+}
+
+h1{
+    font-size:48px;
+    letter-spacing:2px;
+}
+
+p{
+    font-size:18px;
+    opacity:0.8;
+}
+
+.buttons{
+    margin-top:40px;
+}
+
+button{
+    background:#00c6ff;
+    border:none;
+    padding:15px 30px;
+    margin:10px;
+    font-size:16px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#0072ff;
+    transform:scale(1.05);
+}
+
+section{
+    padding:60px 20px;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    border-radius:10px;
+    padding:30px;
+    margin:20px auto;
+    width:80%;
+    max-width:500px;
+    backdrop-filter:blur(10px);
+}
+
+footer{
+    padding:20px;
+    opacity:0.6;
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<header>
+
+<h1>My Security Tool</h1>
+
+<p>Simple tool download page</p>
+
+<div class="buttons">
+
+<button onclick="download('tool.exe')">Download Windows</button>
+
+<button onclick="download('tool_linux')">Download Linux</button>
+
+</div>
+
+</header>
+
+<section>
+
+<div class="card">
+<h2>Features</h2>
+<p>Fast</p>
+<p>Secure</p>
+<p>Easy to Use</p>
+</div>
+
+<div class="card">
+<h2>Version</h2>
+<p>v1.0</p>
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 My Project</p>
+
+</footer>
+
+<script>
+
+function download(file){
+    window.location.href=file
+}
+
+/* 背景粒子动画 */
+
+const canvas=document.getElementById("bg")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+for(let i=0;i<80;i++){
+
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-0.5),
+vy:(Math.random()-0.5),
+r:2
+})
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+ctx.fillStyle="white"
+
+particles.forEach(p=>{
+
+p.x+=p.vx
+p.y+=p.vy
+
+if(p.x<0||p.x>canvas.width)p.vx*=-1
+if(p.y<0||p.y>canvas.height)p.vy*=-1
+
+ctx.beginPath()
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2)
+ctx.fill()
+
+})
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
+
+</script>
+
+</body>
+</html>
